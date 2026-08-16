@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="Yedili/Yedili.csproj" />
+  <Project Path="Yedili/Yedili.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>

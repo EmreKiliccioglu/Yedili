@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="Yedili.Views.GamePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Yedili">
+
+    <Grid
+        Padding="10"
+        RowDefinitions="Auto,*,Auto">
+
+        <!-- ÜST BİLGİ -->
+        <VerticalStackLayout
+            Grid.Row="0"
+            Spacing="4">
+
+            <Label
+                Text="YEDİLİ"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="CurrentPlayerLabel"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+
+
+        <!-- OYUN ALANI -->
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="Auto,*,Auto"
+            ColumnDefinitions="*,*"
+            Padding="10">
+
+            <!-- AI 2 -->
+            <Label
+                x:Name="TopPlayerLabel"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontSize="16"
+                HorizontalOptions="Center" />
+
+
+            <!-- MASA -->
+            <Border
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                StrokeShape="RoundRectangle 20"
+                Padding="20"
+                Margin="10">
+
+                <VerticalStackLayout
+                    Spacing="10">
+
+                    <Label
+                        Text="OYUN ALANI"
+                        HorizontalOptions="Center"
+                        FontSize="18"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        x:Name="BoardLabel"
+                        Text="Henüz kart oynanmadı"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- YAN OYUNCULAR -->
+            <Label
+                x:Name="LeftPlayerLabel"
+                Grid.Row="1"
+                Grid.Column="0"
+                FontSize="14"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+
+            <Label
+                x:Name="RightPlayerLabel"
+                Grid.Row="1"
+                Grid.Column="1"
+                FontSize="14"
+                VerticalOptions="Center"
+                HorizontalOptions="End" />
+
+        </Grid>
+
+
+        <!-- KULLANICI KARTLARI -->
+        <VerticalStackLayout
+            Grid.Row="2"
+            Spacing="5">
+
+            <Label
+                Text="KARTLARIN"
+                FontSize="16"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <ScrollView
+                Orientation="Horizontal">
+
+                <HorizontalStackLayout
+                    x:Name="PlayerHandLayout"
+                    Spacing="-10"
+                    Padding="10" />
+
+            </ScrollView>
+
+            <Button
+                x:Name="PassButton"
+                Text="PAS"
+                IsVisible="False"
+                Clicked="OnPassClicked"
+                HorizontalOptions="Center"
+                WidthRequest="120" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
