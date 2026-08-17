@@ -145,7 +145,11 @@ public partial class GamePage : ContentPage
 
             BackgroundColor = Colors.Transparent,
 
-            Opacity = isValid ? 1.0 : 0.45
+            // Bütün kartlar normal görünür.
+            Opacity = 1.0,
+
+            // Oynanabilir kart biraz yukarı çıkar.
+            TranslationY = isValid ? -15 : 0
         };
 
         button.IsEnabled = isValid;

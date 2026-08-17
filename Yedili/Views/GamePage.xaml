@@ -4,7 +4,8 @@
     x:Class="Yedili.Views.GamePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Yedili">
+    Title="Yedili"
+    BackgroundColor="#176B3A">
 
     <Grid
         Padding="10"
@@ -19,11 +20,13 @@
                 Text="YEDİLİ"
                 FontSize="28"
                 FontAttributes="Bold"
+                TextColor="White"
                 HorizontalOptions="Center" />
 
             <Label
                 x:Name="CurrentPlayerLabel"
                 FontSize="16"
+                TextColor="White"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
@@ -60,7 +63,8 @@
                         Text="OYUN ALANI"
                         HorizontalOptions="Center"
                         FontSize="18"
-                        FontAttributes="Bold" />
+                        FontAttributes="Bold"
+                        TextColor="White" />
 
                     <VerticalStackLayout
                         x:Name="BoardCardsLayout"
@@ -107,6 +111,7 @@
                 Text="KARTLARIN"
                 FontSize="16"
                 FontAttributes="Bold"
+                TextColor="White"
                 HorizontalOptions="Center" />
 
             <ScrollView
@@ -115,7 +120,7 @@
                 <HorizontalStackLayout
                     x:Name="PlayerHandLayout"
                     Spacing="-30"
-                    Padding="10" />
+                    Padding="10,25,10,10" />
 
             </ScrollView>
 
