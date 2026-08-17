@@ -54,15 +54,18 @@ public partial class GamePage : ContentPage
 
     private void UpdateBoard()
     {
-        if (!_game.State.Board.Cards
+        BoardCardsLayout.Children.Clear();
+
+        bool hasCards = _game.State.Board.Cards
             .SelectMany(pair => pair.Value)
-            .Any())
+            .Any();
+
+        EmptyBoardLabel.IsVisible = !hasCards;
+
+        if (!hasCards)
         {
-            BoardLabel.Text = "Henüz kart oynanmadı";
             return;
         }
-
-        var boardLines = new List<string>();
 
         foreach (Suit suit in Enum.GetValues<Suit>())
         {
@@ -75,16 +78,27 @@ public partial class GamePage : ContentPage
                 continue;
             }
 
-            string line = string.Join(
-                "   ",
-                suitCards.Select(GetCardText));
+            var row = new HorizontalStackLayout
+            {
+                Spacing = -20,
+                HorizontalOptions = LayoutOptions.Center
+            };
 
-            boardLines.Add(line);
+            foreach (Card card in suitCards)
+            {
+                var image = new Image
+                {
+                    Source = GetCardImage(card),
+                    WidthRequest = 55,
+                    HeightRequest = 77,
+                    Aspect = Aspect.AspectFit
+                };
+
+                row.Children.Add(image);
+            }
+
+            BoardCardsLayout.Children.Add(row);
         }
-
-        BoardLabel.Text = string.Join(
-            Environment.NewLine + Environment.NewLine,
-            boardLines);
     }
 
     private void UpdatePlayerHand()
@@ -102,9 +116,9 @@ public partial class GamePage : ContentPage
 
         foreach (Card card in sortedHand)
         {
-            Button button = CreateCardButton(
-                card,
-                validMoves.Contains(card));
+            ImageButton button = CreateCardButton(
+            card,
+            validMoves.Contains(card));
 
             PlayerHandLayout.Children.Add(button);
         }
@@ -114,17 +128,24 @@ public partial class GamePage : ContentPage
             _game.CanCurrentPlayerPass();
     }
 
-    private Button CreateCardButton(
-        Card card,
-        bool isValid)
+    private ImageButton CreateCardButton(
+    Card card,
+    bool isValid)
     {
-        var button = new Button
+        var button = new ImageButton
         {
-            Text = GetCardText(card),
-            FontSize = 16,
-            Padding = 5,
-            WidthRequest = 65,
-            HeightRequest = 90
+            Source = GetCardImage(card),
+
+            WidthRequest = 90,
+            HeightRequest = 126,
+
+            Padding = 0,
+
+            Aspect = Aspect.AspectFit,
+
+            BackgroundColor = Colors.Transparent,
+
+            Opacity = isValid ? 1.0 : 0.45
         };
 
         button.IsEnabled = isValid;
@@ -245,5 +266,37 @@ public partial class GamePage : ContentPage
         UpdateScreen();
 
         await PlayAiTurns();
+    }
+
+    private string GetCardImage(Card card)
+    {
+        string suit = card.Suit switch
+        {
+            Suit.Clubs => "clubs",
+            Suit.Diamonds => "diamonds",
+            Suit.Hearts => "hearts",
+            Suit.Spades => "spades",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        string rank = card.Rank switch
+        {
+            Rank.Ace => "a",
+            Rank.Two => "2",
+            Rank.Three => "3",
+            Rank.Four => "4",
+            Rank.Five => "5",
+            Rank.Six => "6",
+            Rank.Seven => "7",
+            Rank.Eight => "8",
+            Rank.Nine => "9",
+            Rank.Ten => "10",
+            Rank.Jack => "j",
+            Rank.Queen => "q",
+            Rank.King => "k",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        return $"card{suit}{rank}.png";
     }
 }

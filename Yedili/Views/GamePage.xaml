@@ -62,8 +62,13 @@
                         FontSize="18"
                         FontAttributes="Bold" />
 
+                    <VerticalStackLayout
+                        x:Name="BoardCardsLayout"
+                        Spacing="4"
+                        HorizontalOptions="Center" />
+
                     <Label
-                        x:Name="BoardLabel"
+                        x:Name="EmptyBoardLabel"
                         Text="Henüz kart oynanmadı"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center" />
@@ -109,7 +114,7 @@
 
                 <HorizontalStackLayout
                     x:Name="PlayerHandLayout"
-                    Spacing="-10"
+                    Spacing="-30"
                     Padding="10" />
 
             </ScrollView>
